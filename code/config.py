@@ -151,5 +151,4 @@ def menu():
         user_management()
     else:
         print("wrong input")
-
 menu()
