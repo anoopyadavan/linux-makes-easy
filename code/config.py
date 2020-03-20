@@ -105,24 +105,44 @@ gpgcheck=0"""
 
 # user management
 def user_management():
-#    def user_add()
+    def show_user():
+        os.system("tput setaf 2")
+        # this fn is for show all user in your system
+        os.system("sudo cat /etc/passwd | grep -A 100 1000  | awk -F : '{print $1}' ; tput setaf 7")
+    def user_add(user_name):
+        user_name=input("Enter user name: ")
+        os.system("sudo adduser {var}".format(var=user_name))                    # i have to make more convenient
+        os.system("sudo passwd {var}".format(var=user_name))
+
+    def user_remove():
+        user_name=input("Enter user name which you want to delete: ")
+        os.system("sudo userdel -r {var}".format(var=user_name))
+
+    def user_modif():
+        print("Currently in progress")
     print("==========================================")
     os.system("tput setaf 1")
-    print("""\t\t1: user add
-    \t\t2: user remove
-    \t\t3: user modification""")
+    print("""\t\t1: Show all user
+    \t\t2: user add
+    \t\t3: user remove
+    \t\t4: user modification""")
     os.system("tput setaf 7")
     print("==========================================")
     num=int(input("Enter number which you want: "))
-    user_name=input("Enter user name: ")
+    #user_name=input("Enter user name: ")
     if(num==1):
-        user_add(user_name)
+        show_user()
     elif(num==2):
-        user_remove(user_name)
+        user_add()
     elif(num==3):
-        user_remove(user_name)
+        user_remove()
+    elif(num==4):
+        user_modify()
     else:
         print("wrong input")
+
+def docker_configuration():
+    print("currently working in progress")
 
 
 def menu():
@@ -133,7 +153,8 @@ def menu():
     \t\t3: Service management
     \t\t4: Software management
     \t\t5: Configuration
-    \t\t6: User management""")
+    \t\t6: User management
+    \t\t7: Docker configuration""")
     os.system("tput setaf 7")
     print("==========================================")
     num=int(input("Enter what services you want: "))
@@ -145,10 +166,13 @@ def menu():
         service_management()
     elif (num==4):
         software_management()
-    elif (num==5):
+    elif(num==5):
         configuration()
     elif (num==6):
         user_management()
+    elif(num==7):
+        docker_configuration()
     else:
         print("wrong input")
+
 menu()
