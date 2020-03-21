@@ -109,6 +109,7 @@ def user_management():
         os.system("tput setaf 2")
         # this fn is for show all user in your system
         os.system("sudo cat /etc/passwd | grep -A 100 1000  | awk -F : '{print $1}' ; tput setaf 7")
+
     def user_add(user_name):
         user_name=input("Enter user name: ")
         os.system("sudo adduser {var}".format(var=user_name))                    # i have to make more convenient
@@ -118,14 +119,41 @@ def user_management():
         user_name=input("Enter user name which you want to delete: ")
         os.system("sudo userdel -r {var}".format(var=user_name))
 
-    def user_modif():
-        print("Currently in progress")
+    def user_modify():
+        def set_comment(user_name):
+            comment=input("Enter comment: ")
+            os.system("sudo usermod -c {com_var} {var}".format(com_var=comment,var=user_name))
+
+        def change_home_dir(user_name):
+            dir_name=input("Enter directory name: ")
+            os.system("sudo usermod -d {dir_var} {var}".format(dir_var=dir_name,var=user_name))
+            os.system("sudo mkdir /home/{dir_var}".format(dir_var=dir_name))
+
+        print("==========================================")
+        os.system("tput setaf 1")
+        print("""\t\t1: set comment
+    \t\t2: change home directory """)
+        os.system("tput setaf 7")
+        print("==========================================")
+        num=int(input("Enter your choice: "))
+        user_name=input("Enter user name: ")
+        if(num==1):
+            set_comment(user_name)
+        elif(num==2):
+            change_home_dir(user_name)
+        else:
+            print("wrong choice")
+
+    def change_passwd():
+        print("currently working on progress")
+
     print("==========================================")
     os.system("tput setaf 1")
     print("""\t\t1: Show all user
     \t\t2: user add
     \t\t3: user remove
-    \t\t4: user modification""")
+    \t\t4: user modification
+    \t\t5: change password""")
     os.system("tput setaf 7")
     print("==========================================")
     num=int(input("Enter number which you want: "))
@@ -138,6 +166,8 @@ def user_management():
         user_remove()
     elif(num==4):
         user_modify()
+    elif(num==5):
+        change_passwd()
     else:
         print("wrong input")
 
