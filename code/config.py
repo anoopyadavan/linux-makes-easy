@@ -145,7 +145,8 @@ def user_management():
             print("wrong choice")
 
     def change_passwd():
-        print("currently working on progress")
+        user_name=input("Enter user name which you want to change password: ")
+        os.system("sudo passwd {var}".format(var=user_name))
 
     print("==========================================")
     os.system("tput setaf 1")
@@ -172,8 +173,29 @@ def user_management():
         print("wrong input")
 
 def docker_configuration():
-    print("currently working in progress")
+    data="""[docker]
+baseurl=https://download.docker.com/linux/centos/7/x86_64/stable/
+gpgcheck=0"""
+    with open("docker.repo","w") as fp:
+        for content in data:
+            fp.write(content)
 
+    os.system("sudo mv -i docker.repo /etc/yum.repos.d/")
+    os.system("sudo yum install docker-ce --nobest")
+
+def configure_server():
+    def configure_httpd():
+        print("working i ")
+    print("==========================================")
+    os.system("tput setaf 1")
+    print("""\t\t1: configure httpd server""")
+    os.system("tput setaf 7")
+    print("==========================================")
+    num=int(input("Enter your choice: "))
+    if(num==1):
+        configure_httpd()
+    else:
+        print("wrong choice")
 
 def menu():
     print("==========================================")
@@ -184,7 +206,8 @@ def menu():
     \t\t4: Software management
     \t\t5: Configuration
     \t\t6: User management
-    \t\t7: Docker configuration""")
+    \t\t7: Docker configuration
+    \t\t8: Configure Server""")
     os.system("tput setaf 7")
     print("==========================================")
     num=int(input("Enter what services you want: "))
@@ -202,6 +225,8 @@ def menu():
         user_management()
     elif(num==7):
         docker_configuration()
+    elif(num==8):
+        configure_server()
     else:
         print("wrong input")
 
