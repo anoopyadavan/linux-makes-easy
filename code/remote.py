@@ -205,42 +205,5 @@ def configure_server():
         configure_ssh()
     else:
         print("wrong choice")
-
-while(True):
-    def menu():
-        print("==========================================")
-        os.system("tput setaf 1")
-        print("""\t\t\t1: Show
-        \t\t2: Package management
-        \t\t3: Service management
-        \t\t4: Software management
-        \t\t5: Configuration
-        \t\t6: User management
-        \t\t7: Docker configuration
-        \t\t8: Configure Server
-        \t\t9: Exit""")
-        os.system("tput setaf 7")
-        print("==========================================")
-        num=int(input("Enter what services you want: "))
-        if (num==1):
-            show()
-        elif (num==2):
-            package_management()
-        elif (num==3):
-            service_management()
-        elif (num==4):
-            software_management()
-        elif(num==5):
-            configuration()
-        elif (num==6):
-            user_management()
-        elif(num==7):
-            docker_configuration()
-        elif(num==8):
-            configure_server()
-        elif(num==9):
-            exit()
-        else:
-            print("wrong input")
-
-    menu()
+if __name__ == '__main__':
+    pass
