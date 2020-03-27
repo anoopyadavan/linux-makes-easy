@@ -23,7 +23,7 @@ def show(user,ip):
     os.system("tput setaf 7")
 
 #package management
-def package_management():
+def package_management(user,ip):
     print("==========================================")
     os.system("tput setaf 1")
     print("""\t\t1: Install
@@ -33,15 +33,15 @@ def package_management():
     num=int(input("Enter what you want to do: "))
     package_name=input("Enter pacakage name: ")
     if (num==1):
-        os.system("sudo yum install {var}".format(var=package_name))
+        os.system("ssh {var}@{var2} sudo yum install {var3}".format(var=user,var2=ip,var3=package_name))
     elif (num==2):
-        os.system("sudo yum remove {var}".format(var=package_name))
+        os.system("ssh {var}@{var2} sudo yum remove {var3}".format(var=user,var2=ip,var3=package_name))
     else:
         print("wrong input")
     os.system("tput setaf 7")
 
 #service management
-def service_management():
+def service_management(user,ip):
     print("==========================================")
     os.system("tput setaf 1")
     print("""\t\t1: show
@@ -52,17 +52,17 @@ def service_management():
     num=int(input("Enter the number which you want: "))
     service_name=input("Enter service name: ")
     if (num==1):
-        os.system("systemctl status {var}".format(var=service_name))
+        os.system("ssh {var}@{var2} systemctl status {var3}".format(var=user,var2=ip,var3=service_name))
     elif (num==2):
-        os.system("systemctl start {var}".format(var=service_name))
+        os.system("ssh {var}@{var2} systemctl start {var3}".format(var=user,var2=ip,var3=service_name))
     elif (num==3):
-        os.system("systemctl stop {var}".format(var=service_name))
+        os.system("ssh {var}@{var2} systemctl stop {var3}".format(var=user,var2=ip,var3=service_name))
     else:
         print("wrong input")
     #os.system("tput setaf 1")
 
 # Software management
-def software_management():
+def software_management(user,ip):
     print("==========================================")
     os.system("tput setaf 1")
     print("""\t\t1: open software
@@ -74,7 +74,7 @@ def software_management():
     softwareManagement.software_manage(num,software_name)
 
 # Configuration
-def configuration():
+def configuration(user,ip):
     
     def yum():
         data="""[dvd1]
@@ -104,16 +104,16 @@ gpgcheck=0"""
     os.system("tput setaf 7")
 
 # user management
-def user_management():
+def user_management(user,ip):
     def show_user():
         os.system("tput setaf 2")
         # this fn is for show all user in your system
-        os.system("sudo cat /etc/passwd | grep -A 100 1000  | awk -F : '{print $1}' ; tput setaf 7")
+        os.system("ssh {var}@{var2} sudo cat /etc/passwd | grep -A 100 1000  | awk -F : '{print $1}' ; tput setaf 7".format(var=user,var2=ip))
 
-    def user_add(user_name):
+    def user_add(user,ip):
         user_name=input("Enter user name: ")
-        os.system("sudo adduser {var}".format(var=user_name))                    # i have to make more convenient
-        os.system("sudo passwd {var}".format(var=user_name))
+        os.system("ssh {var}@{var2} sudo adduser {var3}".format(var=user,var2=ip,var3=user_name))                    # i have to make more convenient
+        os.system("ssh {var}@{var2} sudo passwd {var3}".format(var=user,var2=ip,var3=user_name))
 
     def user_remove():
         user_name=input("Enter user name which you want to delete: ")

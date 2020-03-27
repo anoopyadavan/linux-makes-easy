@@ -43,7 +43,7 @@ if(choice=='local' or choice=='remote'):
                 elif (num==1 and choice=='remote'):
                     remote.show(user_name,ip)
                 elif (num==2 and choice=='remote'):
-                    remote.package_management()
+                    remote.package_management(user_name,ip)
                 elif (num==3 and choice=='remote'):
                     remote.service_management()
                 elif (num==4 and choice=='remote'):
@@ -60,6 +60,8 @@ if(choice=='local' or choice=='remote'):
                     exit()
                 else:
                     print("wrong input")
+                input("Press Enter to continue")
+                os.system("clear")
 
             menu()
 
