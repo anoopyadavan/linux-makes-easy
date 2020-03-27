@@ -2,7 +2,7 @@ import os
 import softwareManagement
 
 # Show basic cmd
-def show():
+def show(user,ip):
     print("==========================================")
     os.system("tput setaf 1")
     print("""\t\t1: Date
@@ -13,11 +13,11 @@ def show():
     num=int(input("Enter your choice: "))
     os.system("tput setaf 2")
     if (num==1):
-        os.system("date")
+        os.system("ssh {var}@{var2} date".format(var=user,var2=ip))
     elif (num==2):
-        os.system("cal")
+        os.system("ssh {var}@{var2} cal".format(var=user,var2=ip))
     elif (num==3):
-        os.system("date | awk '{print $4}'")
+        os.system("ssh {var}@{var2} date | awk '{print $4}'".format(var=user,var2=ip))
     else:
         print("wrong input")
     os.system("tput setaf 7")

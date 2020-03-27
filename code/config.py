@@ -5,7 +5,8 @@ import remote
 
 choice=input("Where you want to run local or remote: ")
 if(choice=='remote'):
-    ip=list(map(int,input("Enter ip of that server: ").split(".")))
+    ip=input("Enter ip of remote server: ")
+    user_name=input("Enter user name: ")
 if(choice=='local' or choice=='remote'):
     while(True):
             def menu():
@@ -40,7 +41,7 @@ if(choice=='local' or choice=='remote'):
                 elif(num==8 and choice=='local'):
                     local.configure_server()
                 elif (num==1 and choice=='remote'):
-                    remote.show()
+                    remote.show(user_name,ip)
                 elif (num==2 and choice=='remote'):
                     remote.package_management()
                 elif (num==3 and choice=='remote'):
