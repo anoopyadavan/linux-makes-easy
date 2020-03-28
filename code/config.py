@@ -2,11 +2,18 @@ import os
 import local
 import remote
 
+def ping(ip):
+    os.system("ping -c 4 {var}".format(var=ip))
 
-choice=input("Where you want to run local or remote: ")
+choice=input("Where you want to run local or remote: ").lower()
 if(choice=='remote'):
     ip=input("Enter ip of remote server: ")
-    user_name=input("Enter user name: ")
+    var=os.popen("ping -c 4 %s | grep received | awk '{print $4}'" % ip).read()
+    if(int(var)>0):
+        user_name=input("Enter user name: ")
+    else:
+        print("Wrong ip provided")
+        exit()
 if(choice=='local' or choice=='remote'):
     while(True):
             def menu():
@@ -20,7 +27,8 @@ if(choice=='local' or choice=='remote'):
                 \t\t6: User management
                 \t\t7: Docker configuration
                 \t\t8: Configure Server
-                \t\t9: Exit""")
+                \t\t9: File management
+                \t\t10: Exit""")
                 os.system("tput setaf 7")
                 print("==========================================")
                 num=int(input("Enter what services you want: "))
@@ -40,6 +48,8 @@ if(choice=='local' or choice=='remote'):
                     local.docker_configuration()
                 elif(num==8 and choice=='local'):
                     local.configure_server()
+                elif(num==9 and choice=='local'):
+                    local.file_management()
                 elif (num==1 and choice=='remote'):
                     remote.show(user_name,ip)
                 elif (num==2 and choice=='remote'):
@@ -56,7 +66,7 @@ if(choice=='local' or choice=='remote'):
                     remote.docker_configuration()
                 elif(num==8 and choice=='remote'):
                     remote.configure_server()
-                elif(num==9):
+                elif(num==10):
                     exit()
                 else:
                     print("wrong input")

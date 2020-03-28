@@ -205,5 +205,9 @@ def configure_server():
         configure_ssh()
     else:
         print("wrong choice")
+
+# file management system and configuration
+def file_management():
+    print("file management is in progress")
 if __name__ == '__main__':
     pass
