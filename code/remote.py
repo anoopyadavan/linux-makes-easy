@@ -108,8 +108,7 @@ def user_management(user,ip):
     def show_user():
         os.system("tput setaf 2")
         # this fn is for show all user in your system
-        os.system("ssh {var}@{var2} sudo cat /etc/passwd | grep -A 100 1000  | awk -F : '{print $1}' ; tput setaf 7".format(var=user,var2=ip))
-
+        os.system("""sudo cat /etc/passwd | awk ' {FS=":" };{if($3 >=1000)print $1;}'""")
     def user_add(user,ip):
         user_name=input("Enter user name: ")
         os.system("ssh {var}@{var2} sudo adduser {var3}".format(var=user,var2=ip,var3=user_name))                    # i have to make more convenient

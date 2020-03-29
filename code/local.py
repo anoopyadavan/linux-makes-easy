@@ -108,8 +108,7 @@ def user_management():
     def show_user():
         os.system("tput setaf 2")
         # this fn is for show all user in your system
-        os.system("sudo cat /etc/passwd | grep -A 100 1000  | awk -F : '{print $1}' ; tput setaf 7")
-
+        os.system("""sudo cat /etc/passwd | awk ' {FS=":" };{if($3 >=1000)print $1;}'""")
     def user_add(user_name):
         user_name=input("Enter user name: ")
         os.system("sudo adduser {var}".format(var=user_name))                    # i have to make more convenient
@@ -208,6 +207,36 @@ def configure_server():
 
 # file management system and configuration
 def file_management():
-    print("file management is in progress")
+    def copy(file_name,source):
+        dest=input("Enter Destination: ")
+        os.system("cp -r {var}/{var2} {var3}".format(var=source,var2=file_name,var3=dest))
+        print("Successful!")
+    def move(file_name,source):
+        dest=input("Enter destination: ")
+        os.system("mv -r {var}/{var2} {var3}".format(var=source,var2=file_name,var3=dest))
+        print("Successful!")
+    def delete(file_name,source):
+        os.system("rm -r {var}/{var2}".format(var=source,var2=file_name))
+        print("Successful!")
+    print("==========================================")
+    os.system("tput setaf 1")
+    print("""\t\t1: Copy
+            \t2: Move
+            \t3: Delete""")
+    os.system("tput setaf 7")
+    print("==========================================")
+    choice=int(input("Enter your choice: "))
+    file_name=input("Enter file name: ")
+    source=input("Enter source path: ")
+    if(choice==1):
+        copy(file_name,source)
+    elif(choice==2):
+        move(file_name,source)
+    elif(choice==3):
+        delete(file_name,source)
+    else:
+        print("Wrong choice!")
+        print("You have to press 1-3 number")
+    
 if __name__ == '__main__':
     pass
