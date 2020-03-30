@@ -109,10 +109,11 @@ def user_management():
         os.system("tput setaf 2")
         # this fn is for show all user in your system
         os.system("""sudo cat /etc/passwd | awk ' {FS=":" };{if($3 >=1000)print $1;}'""")
-    def user_add(user_name):
+    def user_add():
         user_name=input("Enter user name: ")
         os.system("sudo adduser {var}".format(var=user_name))                    # i have to make more convenient
-        os.system("sudo passwd {var}".format(var=user_name))
+        if(os.popen("echo $?").read()==0):
+            os.system("sudo passwd {var}".format(var=user_name))
 
     def user_remove():
         user_name=input("Enter user name which you want to delete: ")

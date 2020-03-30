@@ -17,7 +17,8 @@ def show(user,ip):
     elif (num==2):
         os.system("ssh {var}@{var2} cal".format(var=user,var2=ip))
     elif (num==3):
-        os.system("ssh {var}@{var2} date | awk '{print $4}'".format(var=user,var2=ip))
+        os.system(f"ssh {user}@{ip} date | awk '{{print $4}}' ")
+        pass
     else:
         print("wrong input")
     os.system("tput setaf 7")
