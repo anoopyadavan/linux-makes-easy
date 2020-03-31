@@ -1,6 +1,7 @@
 import os
 import local
 import remote
+import search
 
 def ping(ip):
     os.system("ping -c 4 {var}".format(var=ip))
@@ -11,6 +12,7 @@ if(choice=='remote'):
     var=os.popen("ping -c 4 %s | grep received | awk '{print $4}'" % ip).read()
     if(int(var)>0):
         user_name=input("Enter user name: ")
+        os.system("ssh-copy-id {var}@{var2} 2>/dev/null".format(var=user_name,var2=ip))
     else:
         print("Wrong ip provided")
         exit()
@@ -19,54 +21,59 @@ if(choice=='local' or choice=='remote'):
             def menu():
                 print("==========================================")
                 os.system("tput setaf 1")
-                print("""\t\t\t\t1: Show
-                \t\t2: Package management
-                \t\t3: Service management
-                \t\t4: Software management
-                \t\t5: Configuration
-                \t\t6: User management
-                \t\t7: Docker configuration
-                \t\t8: Configure Server
-                \t\t9: File management
-                \t\t10: Exit""")
+                print("""\t\t\t\t1: Search
+                \t\t2: Show
+                \t\t3: Package management
+                \t\t4: Service management
+                \t\t5: Software management
+                \t\t6: Configuration
+                \t\t7: User management
+                \t\t8: Docker configuration
+                \t\t9: Configure Server
+                \t\t10: File management
+                \t\t11: Exit""")
                 os.system("tput setaf 7")
                 print("==========================================")
                 num=int(input("Enter what services you want: "))
-                if (num==1 and choice=='local'):
-                    local.show()
+                if(num==1):
+                    search.primary()
                 elif (num==2 and choice=='local'):
-                    local.package_management()
+                    local.show()
                 elif (num==3 and choice=='local'):
-                    local.service_management()
+                    local.package_management()
                 elif (num==4 and choice=='local'):
+                    local.service_management()
+                elif (num==5 and choice=='local'):
                     local.software_management()
-                elif(num==5 and choice=='local'):
+                elif(num==6 and choice=='local'):
                     local.configuration()
-                elif (num==6 and choice=='local'):
+                elif (num==7 and choice=='local'):
                     local.user_management()
-                elif(num==7 and choice=='local'):
-                    local.docker_configuration()
                 elif(num==8 and choice=='local'):
-                    local.configure_server()
+                    local.docker_configuration()
                 elif(num==9 and choice=='local'):
+                    local.configure_server()
+                elif(num==10 and choice=='local'):
                     local.file_management()
-                elif (num==1 and choice=='remote'):
-                    remote.show(user_name,ip)
                 elif (num==2 and choice=='remote'):
-                    remote.package_management(user_name,ip)
+                    remote.show(user_name,ip)
                 elif (num==3 and choice=='remote'):
-                    remote.service_management()
+                    remote.package_management(user_name,ip)
                 elif (num==4 and choice=='remote'):
+                    remote.service_management()
+                elif (num==5 and choice=='remote'):
                     remote.software_management()
-                elif(num==5 and choice=='remote'):
+                elif(num==6 and choice=='remote'):
                     remote.configuration()
-                elif (num==6 and choice=='remote'):
+                elif (num==7 and choice=='remote'):
                     remote.user_management()
-                elif(num==7 and choice=='remote'):
-                    remote.docker_configuration()
                 elif(num==8 and choice=='remote'):
+                    remote.docker_configuration()
+                elif(num==9 and choice=='remote'):
                     remote.configure_server()
-                elif(num==10):
+                elif(num==10 and choice=='remote'):
+                    remote.file_management()
+                elif(num==11):
                     exit()
                 else:
                     print("wrong input")

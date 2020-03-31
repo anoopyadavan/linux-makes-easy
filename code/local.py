@@ -92,15 +92,22 @@ gpgcheck=0"""
         os.system("yum repolist")
         os.system("tput setaf 2")
         print("Successful")
+    def ssh_keygen():
+        os.system("ssh-keygen")
+        if(os.popen("echo 4?").read() == 0):
+            print("Successful!")
 
     print("==========================================")
     os.system("tput setaf 1")
-    print("""\t\t1: configure Yum""")
+    print("""\t\t1: configure Yum
+            \t2: generate private key for ssh""")
     os.system("tput setaf 7")
     print("==========================================")
     num=int(input("Enter number which you want: "))
     if (num==1):
         yum()
+    elif(num==2):
+        ssh_keygen()
     os.system("tput setaf 7")
 
 # user management

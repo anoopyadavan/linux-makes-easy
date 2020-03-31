@@ -205,5 +205,9 @@ def configure_server():
         configure_ssh()
     else:
         print("wrong choice")
+
+# configure file management
+def file_management():
+    print("currently in progress")
 if __name__ == '__main__':
     pass
