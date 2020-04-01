@@ -95,9 +95,10 @@ gpgcheck=0"""
             for content in data:
                 f1.write(content)
 
-        os.system("sudo mv yum.repo /etc/yum.repos.d")
-        os.system("yum repolist")
+        os.system("scp -iF yum.repo {var}@{var2}:/etc/yum.repos.d".format(var=user,var2=ip))
+        os.system("ssh {var}@{var2} yum repolist".format(var=user,var2=ip))
         os.system("tput setaf 2")
+        os.system("rm yum.repo")
         print("Successful")
 
     print("==========================================")
@@ -178,7 +179,7 @@ def user_management(user,ip):
     else:
         print("wrong input")
 
-def docker_configuration():
+def docker_configuration(user,ip):
     data="""[docker]
 baseurl=https://download.docker.com/linux/centos/7/x86_64/stable/
 gpgcheck=0"""
@@ -186,8 +187,9 @@ gpgcheck=0"""
         for content in data:
             fp.write(content)
 
-    os.system("sudo mv -i docker.repo /etc/yum.repos.d/")
-    os.system("sudo yum install docker-ce --nobest")
+    os.system("sudo scp -iF docker.repo {var}@{var2}:/etc/yum.repos.d/".format(var=user,var2=ip))
+    os.system("ssh {var}@{var2} sudo yum install docker-ce --nobest".format(var=user,var2=ip))
+    os.system("rm docker.repo")
 
 def configure_server():
     def configure_httpd():

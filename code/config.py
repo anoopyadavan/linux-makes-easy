@@ -67,11 +67,11 @@ if(choice=='local' or choice=='remote'):
                 elif (num==5 and choice=='remote'):
                     remote.software_management(user_name,ip)
                 elif(num==6 and choice=='remote'):
-                    remote.configuration()
+                    remote.configuration(user_name,ip)
                 elif (num==7 and choice=='remote'):
                     remote.user_management()
                 elif(num==8 and choice=='remote'):
-                    remote.docker_configuration()
+                    remote.docker_configuration(user_name,ip)
                 elif(num==9 and choice=='remote'):
                     remote.configure_server()
                 elif(num==10 and choice=='remote'):
