@@ -2,14 +2,16 @@ import os
 import local
 import remote
 import search
+import sys
 
 def ping(ip):
     os.system("ping -c 4 {var}".format(var=ip))
 
 choice=input("Where you want to run local or remote: ").lower()
 if(choice=='remote'):
-    ip=input("Enter ip of remote server: ")
-    var=os.popen("ping -c 4 %s | grep received | awk '{print $4}'" % ip).read()
+   # ip=input("Enter ip of remote server: ")
+    ip="192.168.1.10"
+    var=os.popen("ping -c 1 %s | grep received | awk '{print $4}'" % ip).read()
     if(int(var)>0):
         user_name=input("Enter user name: ")
         os.system("ssh-copy-id {var}@{var2} 2>/dev/null".format(var=user_name,var2=ip))
@@ -36,7 +38,8 @@ if(choice=='local' or choice=='remote'):
                 print("==========================================")
                 num=int(input("Enter what services you want: "))
                 if(num==1):
-                    search.primary()
+                    search_key=input("what you want to search: ")
+                    search.primary(search_key)
                 elif (num==2 and choice=='local'):
                     local.show()
                 elif (num==3 and choice=='local'):
@@ -60,9 +63,9 @@ if(choice=='local' or choice=='remote'):
                 elif (num==3 and choice=='remote'):
                     remote.package_management(user_name,ip)
                 elif (num==4 and choice=='remote'):
-                    remote.service_management()
+                    remote.service_management(user_name,ip)
                 elif (num==5 and choice=='remote'):
-                    remote.software_management()
+                    remote.software_management(user_name,ip)
                 elif(num==6 and choice=='remote'):
                     remote.configuration()
                 elif (num==7 and choice=='remote'):
@@ -74,7 +77,7 @@ if(choice=='local' or choice=='remote'):
                 elif(num==10 and choice=='remote'):
                     remote.file_management()
                 elif(num==11):
-                    exit()
+                    sys.exit()
                 else:
                     print("wrong input")
                 input("Press Enter to continue")

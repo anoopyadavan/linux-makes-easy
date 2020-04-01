@@ -46,7 +46,9 @@ def service_management():
     os.system("tput setaf 1")
     print("""\t\t1: show
     \t\t2: start
-    \t\t3: stop""")
+    \t\t3: stop
+    \t\t4: enable
+    \t\t5: disable""")
     os.system("tput setaf 7")
     print("==========================================")
     num=int(input("Enter the number which you want: "))
@@ -57,6 +59,10 @@ def service_management():
         os.system("systemctl start {var}".format(var=service_name))
     elif (num==3):
         os.system("systemctl stop {var}".format(var=service_name))
+    elif (num==4):
+        os.system("systemctl enable {var}".format(var=service_name))
+    elif (num==5):
+        os.system("systemctl disable {var}".format(var=service_name))
     else:
         print("wrong input")
     #os.system("tput setaf 1")

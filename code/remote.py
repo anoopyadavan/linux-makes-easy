@@ -47,7 +47,9 @@ def service_management(user,ip):
     os.system("tput setaf 1")
     print("""\t\t1: show
     \t\t2: start
-    \t\t3: stop""")
+    \t\t3: stop
+    \t\t4: enable
+    \t\t5: disable""")
     os.system("tput setaf 7")
     print("==========================================")
     num=int(input("Enter the number which you want: "))
@@ -58,6 +60,10 @@ def service_management(user,ip):
         os.system("ssh {var}@{var2} systemctl start {var3}".format(var=user,var2=ip,var3=service_name))
     elif (num==3):
         os.system("ssh {var}@{var2} systemctl stop {var3}".format(var=user,var2=ip,var3=service_name))
+    elif(num==4):
+        os.system("ssh {var}@{var2} systemctl enable {var3}".format(var=user,var2=ip,var3=service_name))
+    elif(num==5):
+        os.system("ssh {var}@{var2} systemctl disable {var3}".format(var=user,var2=ip,var3=service_name))
     else:
         print("wrong input")
     #os.system("tput setaf 1")
