@@ -221,33 +221,52 @@ def configure_server():
 
 # file management system and configuration
 def file_management():
-    def copy(file_name,source):
+    def copy():
+        file_name=input("Enter file name: ")
+        source=input("Enter source path: ")
         dest=input("Enter Destination: ")
         os.system("cp -r {var}/{var2} {var3}".format(var=source,var2=file_name,var3=dest))
         print("Successful!")
-    def move(file_name,source):
+    def move():
+        file_name=input("Enter file name: ")
+        source=input("Enter source path: ")
         dest=input("Enter destination: ")
         os.system("mv -r {var}/{var2} {var3}".format(var=source,var2=file_name,var3=dest))
         print("Successful!")
-    def delete(file_name,source):
+    def delete():
+        file_name=input("Enter file name: ")
+        source=input("Enter source path: ")
         os.system("rm -r {var}/{var2}".format(var=source,var2=file_name))
         print("Successful!")
+    def list():
+        print("currently in progress")
+    def create_file():
+        print("currently in progress")
+    def create_dir():
+        print("currently in progress")
     print("==========================================")
     os.system("tput setaf 1")
     print("""\t\t1: Copy
             \t2: Move
-            \t3: Delete""")
+            \t3: Delete
+            \t4: list the directory
+            \t5: create file
+            \t6: create directory""")
     os.system("tput setaf 7")
     print("==========================================")
     choice=int(input("Enter your choice: "))
-    file_name=input("Enter file name: ")
-    source=input("Enter source path: ")
     if(choice==1):
         copy(file_name,source)
     elif(choice==2):
         move(file_name,source)
     elif(choice==3):
         delete(file_name,source)
+    elif(choice==4):
+        list()
+    elif(choice==5):
+        create_file()
+    elif(choice==6):
+        create_dir()
     else:
         print("Wrong choice!")
         print("You have to press 1-3 number")

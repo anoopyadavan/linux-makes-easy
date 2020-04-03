@@ -7,7 +7,8 @@ def show(user,ip):
     os.system("tput setaf 1")
     print("""\t\t1: Date
     \t\t2: Calendar
-    \t\t3: Time""")
+    \t\t3: Time
+    \t\t4: list the directory""")
     os.system("tput setaf 7")
     print("==========================================")
     num=int(input("Enter your choice: "))
@@ -18,7 +19,8 @@ def show(user,ip):
         os.system("ssh {var}@{var2} cal".format(var=user,var2=ip))
     elif (num==3):
         os.system(f"ssh {user}@{ip} date | awk '{{print $4}}' ")
-        pass
+    elif(num==4):
+        os.system(f"ssh {user}@{ip} ls")
     else:
         print("wrong input")
     os.system("tput setaf 7")
@@ -215,7 +217,56 @@ def configure_server():
         print("wrong choice")
 
 # configure file management
-def file_management():
-    print("currently in progress")
+def file_management(user,ip):
+    def copy():
+        file_name=input("Enter file name: ")
+        source=input("Enter source path: ")
+        dest=input("Enter Destination: ")
+        os.system(f"ssh {user}@{ip}ccp -r {source}/{file_name} {dest}")
+        print("Successful!")
+    def move():
+        file_name=input("Enter file name: ")
+        source=input("Enter source path: ")
+        dest=input("Enter destination: ")
+        os.system(f"ssh {user}@{ip} mv -r {source}/{file_name} {dest}")
+        print("Successful!")
+    def delete():
+        file_name=input("Enter file name: ")
+        source=input("Enter source path: ")
+        os.system(f"ssh {user}@{ip} rm -r {source}/{file_name}")
+        print("Successful!")
+    def list():
+        print("currently in progress")
+    def create_file():
+        print("currently in progress")
+    def create_dir():
+        print("currently in progress")
+    print("==========================================")
+    os.system("tput setaf 1")
+    print("""\t\t1: Copy
+            \t2: Move
+            \t3: Delete
+            \t4: list the directory
+            \t5: create file
+            \t6: create directory""")
+    os.system("tput setaf 7")
+    print("==========================================")
+    choice=int(input("Enter your choice: "))
+    if(choice==1):
+        copy(file_name,source)
+    elif(choice==2):
+        move(file_name,source)
+    elif(choice==3):
+        delete(file_name,source)
+    elif(choice==4):
+        list()
+    elif(choice==5):
+        create_file()
+    elif(choice==6):
+        create_dir()
+    else:
+        print("Wrong choice!")
+        print("You have to press 1-3 number")
+
 if __name__ == '__main__':
     pass

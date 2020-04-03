@@ -10,7 +10,7 @@ def ping(ip):
 choice=input("Where you want to run local or remote: ").lower()
 if(choice=='remote'):
    # ip=input("Enter ip of remote server: ")
-    ip="192.168.1.10"
+    ip="192.168.1.11"
     var=os.popen("ping -c 1 %s | grep received | awk '{print $4}'" % ip).read()
     if(int(var)>0):
         user_name=input("Enter user name: ")
@@ -76,7 +76,7 @@ if(choice=='local' or choice=='remote'):
                     elif(num==9 and choice=='remote'):
                         remote.configure_server()
                     elif(num==10 and choice=='remote'):
-                        remote.file_management()
+                        remote.file_management(user_name,ip)
                     elif(num==11):
                         sys.exit()
                     else:
@@ -87,7 +87,7 @@ if(choice=='local' or choice=='remote'):
                     print("\nExisting program...")
                     sys.exit()
                 except ValueError:
-                    print("Error! Enter only number ex- 1-11")
+                    print("Error! Enter only number")
                     sys.exit()
             menu()
 
