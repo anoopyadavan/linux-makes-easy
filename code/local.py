@@ -239,11 +239,13 @@ def file_management():
         os.system("rm -r {var}/{var2}".format(var=source,var2=file_name))
         print("Successful!")
     def list():
-        print("currently in progress")
+        os.system("ls")
     def create_file():
-        print("currently in progress")
+        file_name=input("Enter file name: ")
+        os.system(f"touch {file_name}") 
     def create_dir():
-        print("currently in progress")
+        dir_name=input("Enter directory name: ")
+        os.system(f"mkdir {dir_name}")
     print("==========================================")
     os.system("tput setaf 1")
     print("""\t\t1: Copy
@@ -269,7 +271,7 @@ def file_management():
         create_dir()
     else:
         print("Wrong choice!")
-        print("You have to press 1-3 number")
+        print("You have to press number")
     
 if __name__ == '__main__':
     pass

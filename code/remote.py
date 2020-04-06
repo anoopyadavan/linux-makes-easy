@@ -236,11 +236,13 @@ def file_management(user,ip):
         os.system(f"ssh {user}@{ip} rm -r {source}/{file_name}")
         print("Successful!")
     def list():
-        print("currently in progress")
+        os.system("ls")
     def create_file():
-        print("currently in progress")
+        file_name=input("Enter file name: ")
+        os.system(f"touch {file_name}")
     def create_dir():
-        print("currently in progress")
+        dir_name=input("Enter directory name: ")
+        os.system(f"mkdir {dir_name}")
     print("==========================================")
     os.system("tput setaf 1")
     print("""\t\t1: Copy
